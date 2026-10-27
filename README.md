@@ -1,7 +1,9 @@
 # SecureBank prototype — study builds
 
+Live: <https://kamalk101.github.io/securebank-hci-prototype/>
+
 Two standalone builds of the nine-screen banking prototype described in
-`HCI_Project_Report.html`: a **good** design that applies the principles and a
+`report/HCI_Project_Report.html`: a **good** design that applies the principles and a
 **bad** design that deliberately violates them. Both share one dataset and one
 study console, so the same tasks can be run on each and compared.
 
