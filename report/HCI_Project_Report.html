@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>HCI Project Report — Online Banking App</title>
+<style>
+@page{size:A4;margin:2cm}
+body{font-family:'Lato','Noto Sans',Arial,sans-serif;font-size:10.5pt;line-height:1.5;color:#1B2A34;margin:0}
+h1{font-size:21pt;color:#0B3C5D;margin:0 0 6pt;line-height:1.2}
+h2{font-size:14.5pt;color:#0B3C5D;margin:18pt 0 6pt;border-bottom:1.5pt solid #0B3C5D;padding-bottom:3pt;page-break-after:avoid}
+h3{font-size:12pt;color:#0B3C5D;margin:14pt 0 4pt;page-break-after:avoid}
+h4{font-size:10.5pt;color:#12212B;margin:10pt 0 3pt}
+p{margin:0 0 7pt;text-align:justify}
+ul,ol{margin:0 0 8pt 18pt;padding:0}
+li{margin-bottom:3pt}
+table{width:100%;border-collapse:collapse;margin:6pt 0 10pt;font-size:9pt;page-break-inside:avoid}
+th{background:#E8F0F4;color:#0B3C5D;text-align:left;padding:4pt 5pt;border:0.75pt solid #AFC0CA;vertical-align:top}
+td{padding:4pt 5pt;border:0.75pt solid #C6D2D9;vertical-align:top}
+.muted{color:#55636E}
+.small{font-size:9pt}
+figure{margin:8pt 0 12pt;text-align:center;page-break-inside:avoid}
+figure img{width:270px;max-width:100%;border:1px solid #B9C7D0;border-radius:5pt}
+figcaption{font-size:8.5pt;color:#4B5A66;font-style:italic;margin-top:3pt}
+.cover{text-align:center;padding-top:18mm}
+.cover .uni{font-size:12pt;font-weight:bold;letter-spacing:.5pt;color:#0B3C5D;margin:0}
+.cover .dept{font-size:10.5pt;color:#4B5A66;margin:2pt 0 0}
+.cover .rule{height:2pt;background:#0B3C5D;width:80%;margin:12pt auto 22pt}
+.cover .course{font-size:12pt;font-weight:bold;color:#0E7C7B;letter-spacing:1pt;text-transform:uppercase;margin:0 0 10pt}
+.cover h1{font-size:32pt;margin:0 0 4pt;letter-spacing:-.5pt}
+.cover .subtitle{font-size:15pt;color:#33434F;margin:0 0 2pt}
+.cover .tag{font-size:11pt;color:#55636E;font-style:italic;margin:0 0 24pt}
+.cover table{width:78%;margin:0 auto 18pt;font-size:10pt;page-break-inside:avoid}
+.cover td{border:0;padding:4pt 6pt;text-align:left}
+.cover td.k{color:#55636E;width:38%}
+.cover td.v{font-weight:bold}
+.cover .note{font-size:9pt;color:#55636E;width:70%;margin:14pt auto 0;line-height:1.5}
+.pagebreak{page-break-after:always;height:0}
+.toc{font-size:10.5pt;margin-top:6pt}
+.toc div{margin-bottom:3pt}
+.toc .l2{margin-left:18pt;font-size:10pt;color:#33434F}
+.note-box{background:#F1F6F8;border-left:3pt solid #0B3C5D;padding:7pt 10pt;margin:8pt 0 10pt;font-size:9.5pt}
+.warn-box{background:#FFF7E7;border-left:3pt solid #8A5A00;padding:7pt 10pt;margin:8pt 0 10pt;font-size:9.5pt}
+.screen-meta{margin:0 0 6pt}
+.screen-meta p{margin:0 0 4pt}
+.screen-meta b.lbl{color:#0B3C5D}
+.two-col{display:table;width:100%}
+.two-col>div{display:table-cell;width:50%;vertical-align:top;padding-right:8pt}
+.refs p{text-indent:-18pt;margin-left:18pt;font-size:9.5pt}
+</style>
+</head>
+<body>
+
+<!-- ============ COVER ============ -->
+<div class="cover">
+  <p class="uni">MEHRAN UNIVERSITY OF ENGINEERING AND TECHNOLOGY, JAMSHORO</p>
+  <p class="dept">Department of Software Engineering</p>
+  <div class="rule"></div>
+  <p class="course">Human-Computer Interaction (HCI)</p>
+  <h1>Online Banking App</h1>
+  <p class="subtitle">Good HCI Design and Bad HCI Design</p>
+  <p class="tag">Project Report · Group Project (3 Students)</p>
+
+  <table>
+    <tr><td class="k">Project Title</td><td class="v">Online Banking App</td></tr>
+    <tr><td class="k">Submitted by</td><td class="v">Kamal Kumar (24SW150)<br>Badal Rai (24SW02)<br>Muhammad Hassan (24-22SW111)</td></tr>
+    <tr><td class="k">Department</td><td class="v">Software Engineering</td></tr>
+    <tr><td class="k">Semester and Year</td><td class="v">5th Semester, 2026</td></tr>
+    <tr><td class="k">Instructor</td><td class="v">Dr. Amirita Dewani</td></tr>
+    <tr><td class="k">Submission Date</td><td class="v">____________________</td></tr>
+  </table>
+
+  <p class="note">Submitted in partial fulfilment of the requirements of the Human-Computer Interaction course. The application presented in this report is a fictional case study created for academic purposes.</p>
+</div>
+<div class="pagebreak"></div>
+
+<!-- ============ CONTENTS ============ -->
+<h1 style="font-size:18pt">Contents</h1>
+<div class="toc">
+  <div><b>1.</b> Cover Page</div>
+  <div><b>2.</b> Introduction</div>
+  <div class="l2">2.1 The Application · 2.2 Purpose of the System · 2.3 Problems and Needs Addressed · 2.4 Scope and Approach</div>
+  <div><b>3.</b> Target Users</div>
+  <div class="l2">3.1 User Groups and Requirements · 3.2 Personas</div>
+  <div><b>4.</b> Good HCI Design</div>
+  <div class="l2">4.1 Design Overview · 4.2 Design System and Style Guide · 4.3 Interface Layouts (Screens 1–9) · 4.4 HCI Principles Applied</div>
+  <div><b>5.</b> Bad HCI Design</div>
+  <div class="l2">5.1 Bad Design Screens (Screens 1–9)</div>
+  <div><b>6.</b> Comparison: Good vs. Bad HCI Design</div>
+  <div><b>7.</b> Design Tools</div>
+  <div><b>8.</b> Conclusion</div>
+  <div><b>9.</b> References</div>
+</div>
+<div class="pagebreak"></div>
+
+<!-- ============ 2 INTRODUCTION ============ -->
+<h2>2. Introduction</h2>
+
+<h3>2.1 The Application</h3>
+<p><b>SecureBank</b> is a fictional retail banking application used as the case study for this project. The application represents a typical mobile banking service offered by a commercial bank in Pakistan. It allows customers to view account balances, transfer money, pay utility bills, manage debit and credit cards, review transaction history, and contact support from a single mobile interface.</p>
+<p>The project considers a mobile-first application because most banking interactions in the target environment now begin on a smartphone. The same interaction flow could also be delivered through a responsive web interface; the design decisions in this report apply to both platforms.</p>
+
+<h3>2.2 Purpose of the System</h3>
+<p>The system lets customers complete routine banking tasks — checking balances, transferring money, paying bills, controlling card security, reviewing records, and getting help — quickly, securely, and without visiting a branch or waiting on a telephone line. Every screen in this report is judged against that single goal.</p>
+
+<h3>2.3 Problems and Needs Addressed</h3>
+<p>The design addresses several practical problems reported by banking customers:</p>
+<table>
+  <tr><th style="width:32%">Problem</th><th>Need created by the problem</th></tr>
+  <tr><td>Branch queues and limited banking hours</td><td>Complete common tasks at any time, in a few steps, without visiting a branch.</td></tr>
+  <tr><td>Uncertainty about balance and recent payments</td><td>A clear, trustworthy summary of the balance and the latest transactions on the home screen.</td></tr>
+  <tr><td>Fear of sending money to the wrong account</td><td>A review step, clear beneficiary details, and confirmation before an irreversible transfer.</td></tr>
+  <tr><td>Missed bill deadlines and late fees</td><td>Visible due dates, saved billers, and a short payment flow.</td></tr>
+  <tr><td>Card misuse and slow replacement</td><td>Immediate card freeze and clear, separated actions for lost or stolen cards.</td></tr>
+  <tr><td>Support delays and unanswered complaints</td><td>Visible agent availability, real-time chat, and a fallback channel when chat is unavailable.</td></tr>
+  <tr><td>Low digital confidence among older and low-vision users</td><td>Readable text, high contrast, large touch targets, text scaling, and a language option.</td></tr>
+</table>
+
+<h3>2.4 Scope and Approach</h3>
+<p>The project contains two complete variants of the same nine-screen flow: a <b>Good HCI Design</b> that applies usability and accessibility principles, and a <b>Bad HCI Design</b> that intentionally violates them so the resulting problems can be analysed. Both cover identical tasks, so the comparison in Section 6 is like-for-like. Design work followed four stages — identifying users and context, defining functional and non-functional requirements, building a consistent visual system and layouts, then reviewing both variants against Shneiderman's eight golden rules, HCI interaction models, information-display and data-entry guidelines, distributed-interface considerations, and quality-of-service requirements.</p>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 3 TARGET USERS ============ -->
+<h2>3. Target Users</h2>
+
+<h3>3.1 User Groups and Requirements</h3>
+<p>The application serves several distinct user groups. Each group has different goals, abilities, and contexts, so the design must support a range of experience levels rather than a single "average" user.</p>
+<table>
+  <tr><th style="width:24%">User group</th><th style="width:40%">Main goals</th><th>Design implications</th></tr>
+  <tr><td>Salaried professionals (25–45)</td><td>Check salary, pay bills, transfer money to family, review spending.</td><td>Fast paths, saved beneficiaries, clear history, biometric login.</td></tr>
+  <tr><td>University students (18–24)</td><td>Receive money from parents, pay small bills, top up mobile credit.</td><td>Low-friction transfer flow, small amounts, strong privacy in public places.</td></tr>
+  <tr><td>Older customers (60+)</td><td>Check pension or savings, pay bills, avoid mistakes.</td><td>Large text, high contrast, simple language, generous touch targets, visible labels.</td></tr>
+  <tr><td>Small business owners</td><td>Frequent transfers, supplier payments, proof of payment.</td><td>Quick repeat payments, receipts, searchable history, downloadable statements.</td></tr>
+  <tr><td>Users with visual or motor impairments</td><td>Use the app independently with a screen reader or limited dexterity.</td><td>Screen-reader labels, text scaling, 48 px targets, no colour-only meaning, reduced motion.</td></tr>
+  <tr><td>Bank staff and support agents</td><td>Resolve customer issues and verify transactions.</td><td>Clear transaction references, chat context, and access to the same status information as the customer.</td></tr>
+</table>
+<p>These groups, together with the personas in Section 3.2, produce the requirements below, separated into what the system must do and how well it must behave.</p>
+<table>
+  <tr><th style="width:50%">Functional requirements</th><th>Non-functional requirements</th></tr>
+  <tr><td>
+    <ul style="margin:0 0 0 14pt">
+      <li>Secure login with password, OTP, and optional biometrics</li>
+      <li>View total and per-account balances</li>
+      <li>Transfer money to saved or new beneficiaries</li>
+      <li>Schedule a future transfer</li>
+      <li>Pay utility, internet, and mobile bills</li>
+      <li>Search and filter transaction history</li>
+      <li>Freeze or unfreeze a card; report a lost card</li>
+      <li>Download a receipt or statement</li>
+      <li>Change language, text size, and contrast</li>
+      <li>Contact support through chat or a message ticket</li>
+    </ul>
+  </td><td>
+    <ul style="margin:0 0 0 14pt">
+      <li>Login response within 2 seconds on a normal connection</li>
+      <li>Transfer confirmation within 3 seconds</li>
+      <li>99.9% availability during banking hours</li>
+      <li>WCAG 2.1 AA contrast (4.5:1 for text)</li>
+      <li>Body text of at least 16 px and touch targets of at least 48 px</li>
+      <li>Encrypted transmission and masked account numbers</li>
+      <li>Offline access to the last 30 days of history</li>
+      <li>Compatibility with Android, iOS, and mobile web</li>
+      <li>No duplicate debit after a retry or a dropped connection</li>
+      <li>Screen-reader support and text scaling up to 200%</li>
+    </ul>
+  </td></tr>
+</table>
+
+<h3>3.2 Personas</h3>
+<table>
+  <tr><th style="width:18%">Persona</th><th style="width:41%">Profile and goals</th><th>What the design must provide</th></tr>
+  <tr><td><b>Ayesha, 28</b><br>Salaried professional</td><td>Works full-time in Karachi. Pays electricity, internet, and mobile bills every month and sends money to her parents. Usually uses the app one-handed on the commute.</td><td>Thumb-reachable primary actions, saved billers, bill reminders, and a clear success receipt.</td></tr>
+  <tr><td><b>Ali, 21</b><br>University student</td><td>Receives a monthly allowance and pays small bills. Checks his balance frequently and often uses the app in public.</td><td>Fast balance access, a privacy control to hide amounts, and a short transfer flow.</td></tr>
+  <tr><td><b>Hassan, 67</b><br>Retired, low vision</td><td>Manages a pension account. Has difficulty reading small text and sometimes taps the wrong control.</td><td>16 px minimum text, high contrast, 48 px targets, text scaling, and plain-language errors.</td></tr>
+  <tr><td><b>Sana, 35</b><br>Small business owner</td><td>Makes several supplier payments each week and needs proof of payment for her records.</td><td>Repeat transfers, searchable history, reference numbers, and downloadable receipts.</td></tr>
+</table>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 4 GOOD DESIGN ============ -->
+<h2>4. Good HCI Design</h2>
+
+<h3>4.1 Design Overview</h3>
+<p>The good design follows a concept called <b>"calm banking"</b>. Each screen answers one question and offers one primary action. The user should always know three things: where they are, what the system is doing, and what will happen next. The design therefore favours visible labels over icons alone, a predictable bottom navigation bar, a review step before any irreversible action, and plain-language feedback.</p>
+<p>The interaction model mirrors the real-world mental model of banking: <i>accounts → transfer → review → confirm → receipt</i>. The interface uses a familiar conceptual model (Section 4.4.2), keeps the same terminology throughout, and never hides essential information such as fees or available balance. The result is a flow that a first-time user can complete without training and a frequent user can complete in a few taps.</p>
+<p>Three rules guided every screen:</p>
+<ol>
+  <li><b>One primary action per screen.</b> Secondary and destructive actions are visually quieter and separated.</li>
+  <li><b>Verify before commit.</b> Money movements are reviewed, confirmed with an OTP, and followed by a receipt.</li>
+  <li><b>Never rely on memory.</b> Labels, summaries, saved beneficiaries, and step indicators remove the need to remember previous screens.</li>
+</ol>
+<p>Navigation follows the same model: a bottom bar of five stable destinations, each containing a short linear task flow rather than deep, unpredictable menus.</p>
+<table>
+  <tr><th style="width:20%">Tab</th><th style="width:38%">Contains</th><th>Example flow</th></tr>
+  <tr><td>Home</td><td>Balance, quick actions, bill reminder, recent activity.</td><td>Home → Transfer → Review → OTP → Success</td></tr>
+  <tr><td>Payments</td><td>Send money, bills, scheduled payments, history.</td><td>Payments → Bill → Review → Success</td></tr>
+  <tr><td>Cards</td><td>Card visual, controls, freeze, report lost.</td><td>Cards → Freeze → Toast → Unfreeze</td></tr>
+  <tr><td>Support</td><td>Help topics, live chat, tickets.</td><td>Support → Chat → Transcript</td></tr>
+  <tr><td>Profile</td><td>Personal details, security, accessibility, language.</td><td>Profile → Text size → Live preview</td></tr>
+</table>
+<p>Across all screens the back action never discards entered data without asking, the current tab remains highlighted, the step indicator shows progress in multi-step tasks, and irreversible actions always require an explicit confirmation.</p>
+
+<h3>4.2 Design System and Style Guide</h3>
+<p>A single visual system runs across all nine screens, so the interface feels consistent and predictable and the chance of misreading a control is low. The palette below is the core of that system.</p>
+<table>
+  <tr><th style="width:24%">Role</th><th style="width:16%">Hex</th><th>Use</th></tr>
+  <tr><td>Primary brand</td><td>#0B3C5D</td><td>App bar, primary buttons, active navigation; white text on it gives about 11.5:1 contrast.</td></tr>
+  <tr><td>Teal accent</td><td>#0E7C7B</td><td>Active switches and supportive accents; never the only signal.</td></tr>
+  <tr><td>Success / credit</td><td>#1B7F4B</td><td>Successful states and incoming amounts, always paired with a label or icon.</td></tr>
+  <tr><td>Error / destructive</td><td>#B3261E</td><td>Validation errors, failed states, and destructive actions.</td></tr>
+  <tr><td>Warning</td><td>#8A5A00 on #FFF7E7</td><td>Due dates, irreversible-action warnings, and pending states.</td></tr>
+  <tr><td>Background / surface</td><td>#F5F7F9 / #FFFFFF</td><td>Page background and the white cards, sheets, fields, and navigation bar.</td></tr>
+  <tr><td>Primary / secondary text</td><td>#12212B / #55636E</td><td>Body text (over 14:1) and supporting labels (about 6.2:1 on white).</td></tr>
+  <tr><td>Border</td><td>#DFE6EB</td><td>Card outlines, dividers, and input borders.</td></tr>
+</table>
+<p><b>Typography.</b> Lato with a system fallback; display and balance text at 31 px with tabular figures so digits do not shift, headings at 24–28 px, body at 16 px (the enforced minimum), secondary text at 13–14 px, captions at 12–13 px. Line height is 1.5 for body and 1.2 for headings, and uppercase is limited to short section labels.</p>
+<p><b>Layout and components.</b> An 8-point spacing scale with 16 px side margins; touch targets of at least 48 × 48 px with 8 px between controls; cards at a 16 px radius with a 1 px border; one filled primary button per screen, outlined secondary actions, and red destructive actions with a confirmation step; labelled fields 56 px high with inline validation; five labelled bottom tabs; skeleton loaders after 300 ms, loading buttons, success toasts, and a full confirmation screen for payments; amounts as <i>PKR 15,000.00</i>, dates as <i>24 Oct 2026</i>, and accounts masked as <i>•• 0023</i>.</p>
+<p><b>Accessibility.</b> WCAG 2.1 AA contrast; colour never the only carrier of meaning; visible labels and screen-reader descriptions in visual reading order; text scaling to 200%, selectable high contrast and reduced motion; errors that name the field, explain the problem, state the fix, and move focus to the first error; and a session timeout that warns before expiry and allows an extension.</p>
+
+<div class="pagebreak"></div>
+
+<h3>4.3 Interface Layouts</h3>
+<p>The same nine-screen flow is used for both the good and the bad variants. The table below lists the screens and the figure that presents each one in the good design.</p>
+<table>
+  <tr><th style="width:12%">Figure</th><th style="width:26%">Screen</th><th>Role in the flow</th></tr>
+  <tr><td>4.1</td><td>Login and 2FA</td><td>Authenticate the customer and establish trust.</td></tr>
+  <tr><td>4.2</td><td>Home dashboard</td><td>Show balance, quick actions, and what needs attention.</td></tr>
+  <tr><td>4.3</td><td>Fund transfer</td><td>Enter the recipient and amount with minimal errors.</td></tr>
+  <tr><td>4.4</td><td>Review, OTP, and confirmation</td><td>Verify the transfer before an irreversible action.</td></tr>
+  <tr><td>4.5</td><td>Transaction history</td><td>Find, verify, and download previous transactions.</td></tr>
+  <tr><td>4.6</td><td>Bill payment</td><td>Select a biller and pay before the due date.</td></tr>
+  <tr><td>4.7</td><td>Card management</td><td>Control card settings and respond to loss or theft.</td></tr>
+  <tr><td>4.8</td><td>Profile and accessibility settings</td><td>Adjust text, contrast, language, and security.</td></tr>
+  <tr><td>4.9</td><td>Help and live support</td><td>Resolve problems through chat, with an asynchronous fallback.</td></tr>
+</table>
+
+<h4>4.3.1 Login Screen</h4>
+<figure><img src="screens/good-g1.png" alt="Good design: login screen"><figcaption>Figure 4.1 — Good design: Login screen with inline error, biometric shortcut, and security reassurance.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Authenticate a returning customer, prevent unauthorised access, and reassure the user that the app is trustworthy.</p>
+<p><b class="lbl">Layout and navigation:</b> A single column with 24 px side margins: brand and language selector, a short welcome heading, the labelled account/CNIC and password fields (each with a visibility toggle and inline validation with an attempt counter), the "remember this device" and "forgot password" row, the primary login button, a fingerprint shortcut, a security note, and a registration link — with no promotional banners competing for attention. Successful login continues to the dashboard, or to the OTP step on an untrusted device; "Forgot password" opens recovery, "Open an account" starts registration, and the back gesture exits without losing the typed account number.</p>
+<p><b class="lbl">Design decisions:</b> Labels sit above the fields rather than inside them, so they remain visible while typing. The error message explains what happened and how many attempts remain, rather than showing a technical code. The show-password control reduces typing errors on small keyboards. "Remember this device" is off by default because shared devices are common. The fingerprint option is a shortcut for frequent users while the password remains available for everyone. The security note addresses phishing anxiety and builds trust.</p>
+</div>
+
+<h4>4.3.2 Home Dashboard</h4>
+<figure><img src="screens/good-g2.png" alt="Good design: dashboard screen"><figcaption>Figure 4.2 — Good design: Home dashboard with a dominant balance card, four quick actions, a bill reminder, and a short activity list.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Answer the two questions customers open a banking app for: "How much money do I have?" and "What needs my attention?" — within a few seconds.</p>
+<p><b class="lbl">Layout and navigation:</b> A greeting and avatar, a full-width balance card with a hide/show control, masked account number and "updated just now" indicator, then four quick-action tiles (Transfer, Pay bill, Scan QR, Top-up), an upcoming-bill reminder, and three recent transactions with icons and status. The five-item tab bar stays visible, switching between Home, Payments, Cards, Support, and Profile without losing state; quick actions open their flow directly, "See all" opens history, and any row opens its detail sheet.</p>
+<p><b class="lbl">Design decisions:</b> The balance is the largest element on the screen, while the date and "updated" note are deliberately secondary. Only three recent transactions are shown to avoid clutter; the rest are one tap away. The eye control supports privacy in public places. The upcoming bill is surfaced before promotions would be, because it is the action most likely to prevent a late fee. Status labels ("Completed", "Processing") accompany colour so that meaning does not depend on colour alone.</p>
+</div>
+
+<h4>4.3.3 Fund Transfer</h4>
+<figure><img src="screens/good-g3.png" alt="Good design: fund transfer screen"><figcaption>Figure 4.3 — Good design: Fund transfer with saved beneficiaries, a clear amount field, fee transparency, and a step indicator.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Collect the recipient, amount, and timing of a transfer with minimal effort and minimal chance of error.</p>
+<p><b class="lbl">Layout and navigation:</b> A three-step indicator, source-account card, a horizontal row of beneficiary chips (including "New"), an amount card showing the available balance and fee, a "send now / schedule" segmented control, an optional note field with a character counter, and a sticky full-width "Continue" button. "Continue" opens the review screen; the back arrow returns to the dashboard with entered data intact; "New" opens the beneficiary form while a saved person is selected immediately.</p>
+<p><b class="lbl">Design decisions:</b> The flow is split into three steps so that the user is not asked to verify and confirm on the same screen. Saved beneficiaries support recognition over recall. The fee and arrival time are shown before the user commits, avoiding surprise charges. The amount uses a numeric input with a fixed currency label, and the available balance is repeated so that the user does not have to remember it. "Continue" is used consistently rather than mixing "Submit", "Proceed", and "Next".</p>
+</div>
+
+<h4>4.3.4 Review, OTP, and Confirmation</h4>
+<figure><img src="screens/good-g4.png" alt="Good design: review and OTP screen"><figcaption>Figure 4.4 — Good design: Review and OTP sheet. The summary stays visible behind the verification step.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Give the user a final opportunity to verify the transfer, then verify their identity before the money leaves the account.</p>
+<p><b class="lbl">Layout and navigation:</b> A summary card with recipient, source, amount, and fee rows plus a highlighted total, an irreversibility warning, and a bottom sheet with six OTP cells, a resend timer, "Confirm transfer", and "Cancel"; the dimmed summary stays visible behind the sheet. Editing a row returns to that field with data intact, "Cancel" closes without sending, and confirmation leads to a success screen with a reference number, "Download receipt", "Done", and "Send another".</p>
+<p><b class="lbl">Design decisions:</b> Separating review from entry is a strong error-prevention measure, especially for irreversible transfers. The amount is the most prominent value in the summary because it is the detail users most often need to confirm. The warning states plainly that a transfer cannot be reversed, which sets accurate expectations. The OTP has a visible timer and a resend option so the user is never stuck. Closure is provided by a dedicated success screen with a reference number and a receipt, rather than a toast that disappears before it can be read.</p>
+</div>
+
+<h4>4.3.5 Transaction History</h4>
+<figure><img src="screens/good-g5.png" alt="Good design: transaction history screen"><figcaption>Figure 4.5 — Good design: Transaction history grouped by date, with search, filters, and textual status labels.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Help the customer find a specific transaction, confirm that a payment was received, and obtain a record for personal or business use.</p>
+<p><b class="lbl">Layout and navigation:</b> A search field, scrolling filter chips (All, Money in, Money out, Bills), and transactions grouped under date headings, each row showing an icon, description, time, amount, and written status; a statement download in the app bar offers a date range and file format. Tapping a row opens a detail sheet and back returns to the same scroll position, with the Payments tab still selected.</p>
+<p><b class="lbl">Design decisions:</b> Grouping by date reduces a long list to manageable chunks. Dates and currency use one format throughout. Status is written in words as well as marked with a dot, so the meaning survives colour blindness and grayscale printing. Search accepts either a name or an amount, matching the two ways customers usually remember a payment. The most recent 30 days are cached for offline viewing, which supports the asynchronous side of mobile banking.</p>
+</div>
+
+<h4>4.3.6 Bill Payment</h4>
+<figure><img src="screens/good-g6.png" alt="Good design: bill payment screen"><figcaption>Figure 4.6 — Good design: Bill payment with search, categories, saved billers, and visible due dates.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Let the customer pay a recurring bill in a few steps and see the due date before it becomes a late payment.</p>
+<p><b class="lbl">Layout and navigation:</b> A biller search field, a four-item category grid, a "Saved billers" list showing consumer number, due date, and amount with selection state, a contextual note, and a sticky "Continue" button. Selecting a biller opens its payment form, followed by review and success; "Manage" opens the saved-biller editor and back returns to the category list.</p>
+<p><b class="lbl">Design decisions:</b> Saved billers remove the need to remember long consumer numbers. The due date is shown at the same level as the amount because it drives urgency. The helper note explains where the consumer number is printed, which prevents the most common bill-payment error. Fees are shown before confirmation. AutoPay is available but never enabled silently.</p>
+</div>
+
+<h4>4.3.7 Card Management</h4>
+<figure><img src="screens/good-g7.png" alt="Good design: card management screen"><figcaption>Figure 4.7 — Good design: Card management with labelled switches, a protected PIN action, and a separated danger zone.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Give the customer immediate control over card security without calling the bank or visiting a branch.</p>
+<p><b class="lbl">Layout and navigation:</b> A card visual with an active/frozen status pill, a grouped list of labelled switches (online payments, contactless, show PIN, freeze card), and a visually separated "Report lost or stolen" danger zone. Toggles apply immediately with a short toast, "Freeze card" can be reversed on the same screen, "Report lost or stolen" opens a confirmation and replacement flow, and the Cards tab stays active.</p>
+<p><b class="lbl">Design decisions:</b> Every switch has a label and a description, so the user knows what will change. Freeze is reversible and clearly separated from the permanent "Report lost" action, which prevents accidental cancellation. The PIN is never shown without re-authentication. The same words ("Freeze", "Report lost") are used throughout, avoiding the common mix of "lock", "block", "disable", and "suspend".</p>
+</div>
+
+<h4>4.3.8 Profile and Accessibility Settings</h4>
+<figure><img src="screens/good-g8.png" alt="Good design: settings screen"><figcaption>Figure 4.8 — Good design: Profile and accessibility settings with grouped sections and visible values.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Let users adjust readability, language, security, and notification preferences without hunting through a long list of unrelated options.</p>
+<p><b class="lbl">Layout and navigation:</b> A compact profile header followed by four labelled groups — Accessibility, Security, Language, and Account — with a text-size slider showing its value and a live preview, high-contrast and reduce-motion switches showing their state, two-factor and change-password rows, an English/اردو segmented control, and a separated logout button. Each row opens a focused subpage or changes the setting immediately with a brief confirmation, and logging out requires confirmation and returns to the login screen.</p>
+<p><b class="lbl">Design decisions:</b> Settings are grouped by task rather than listed flat, which reduces scanning time. The slider shows a value and affects a live preview, so the user can see the result before leaving. Destructive or session-ending actions are kept away from everyday preferences. Urdu is offered alongside English, and the layout supports right-to-left text. Nothing is hidden behind a "Save" button that gives no feedback.</p>
+</div>
+
+<h4>4.3.9 Help and Live Support</h4>
+<figure><img src="screens/good-g9.png" alt="Good design: support chat screen"><figcaption>Figure 4.9 — Good design: Support chat with agent identity, presence, timestamps, typing feedback, and a safety notice.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Purpose:</b> Resolve a customer's problem through a real-time conversation, while still offering a reliable path when no agent is available.</p>
+<p><b class="lbl">Layout and navigation:</b> An agent card with presence and expected reply time, a conversation area with distinct incoming and outgoing timestamped bubbles, a typing indicator, quick-reply chips, a security banner, and a message composer with attachment and send controls. Back returns to the Support tab with the conversation preserved, "End chat" offers to email a transcript, and an offline agent switches the interface to a ticket with an expected response time and a reference number.</p>
+<p><b class="lbl">Design decisions:</b> The screen combines a synchronous channel (live chat) with an asynchronous fallback (ticket and email), which reflects the distributed-interface model. Presence and wait time set expectations instead of leaving the user guessing. Incoming and outgoing messages are visually distinct, and timestamps make the sequence clear. The typing indicator provides feedback during a delay. The security banner prevents the most dangerous support interaction: sharing an OTP with someone who claims to be from the bank.</p>
+</div>
+
+<div class="pagebreak"></div>
+
+<h3>4.4 HCI Principles Applied</h3>
+<p>The design applies established HCI principles rather than merely listing them. The tables below connect each principle to a specific element of the interface.</p>
+
+<h4>4.4.1 Core usability principles</h4>
+<table>
+  <tr><th style="width:22%">Principle</th><th style="width:34%">Where it appears</th><th>How it is implemented</th></tr>
+  <tr><td>Visibility of system status</td><td>Dashboard, transfer, history, support</td><td>"Updated just now", skeleton loaders, processing status, OTP timer, typing indicator, and a success receipt all tell the user what the system is doing.</td></tr>
+  <tr><td>Consistency and standards</td><td>All screens</td><td>One palette, one type scale, one button hierarchy; "Continue" always means the next step; the bottom bar is always in the same place.</td></tr>
+  <tr><td>Match between system and real world</td><td>Terminology and flow</td><td>Words such as "Send money", "Pay bill", and "Freeze card" mirror the language customers use; the flow copies a real transfer: choose recipient, enter amount, review, confirm, receive receipt.</td></tr>
+  <tr><td>User control and freedom</td><td>Transfer, cards, settings</td><td>Back, cancel, edit, freeze/unfreeze, hide balance, and a warned session timeout keep the user in control. A transfer can be cancelled before confirmation.</td></tr>
+  <tr><td>Error prevention</td><td>Transfer, bills, cards</td><td>Saved beneficiaries, input constraints, visible limits, a review screen, OTP, and confirmations for destructive actions prevent errors before they occur.</td></tr>
+  <tr><td>Recognition rather than recall</td><td>Dashboard, transfer, bills, history</td><td>Labels stay visible, saved beneficiaries and billers are shown, the amount is repeated on the review screen, and the step indicator shows progress.</td></tr>
+  <tr><td>Help users recognise and recover from errors</td><td>Login and forms</td><td>Plain-language messages state what went wrong, where, and how to fix it; the attempt counter sets expectations; focus moves to the first invalid field.</td></tr>
+  <tr><td>Flexibility and efficiency of use</td><td>Login, dashboard, history</td><td>Biometric login and quick actions shorten frequent tasks, while the same features remain reachable through the standard menu for new users.</td></tr>
+  <tr><td>Aesthetic and minimalist design</td><td>All screens</td><td>One primary action per screen, no advertising, and only the information needed for the current task.</td></tr>
+  <tr><td>Accessibility</td><td>All screens</td><td>WCAG AA contrast, 16 px body text, 48 px targets, text scaling, high contrast, reduced motion, screen-reader labels, and no colour-only meaning.</td></tr>
+</table>
+
+<h4>4.4.2 Shneiderman's eight golden rules</h4>
+<table>
+  <tr><th style="width:28%">Golden rule</th><th>Implementation in the good design</th></tr>
+  <tr><td>1. Strive for consistency</td><td>The same colours, spacing, button styles, and terms are used on every screen; primary actions are always filled, secondary actions outlined, destructive actions red.</td></tr>
+  <tr><td>2. Enable frequent users to use shortcuts</td><td>Fingerprint login, quick-action tiles, saved beneficiaries, and saved billers shorten repeated tasks.</td></tr>
+  <tr><td>3. Offer informative feedback</td><td>Inline validation, loading states, "Processing" status, OTP timer, typing indicator, toasts, and the success receipt.</td></tr>
+  <tr><td>4. Design dialogs to yield closure</td><td>Each flow ends with a clear result: a success screen, a reference number, and a receipt or transcript.</td></tr>
+  <tr><td>5. Offer simple error handling</td><td>Messages are written in plain language, identify the field, and explain how to correct it; technical codes are never shown to the customer.</td></tr>
+  <tr><td>6. Permit easy reversal of actions</td><td>Users can edit before confirming, cancel a transfer before sending, unfreeze a card, and leave settings without saving.</td></tr>
+  <tr><td>7. Support internal locus of control</td><td>The user initiates every action; the system never auto-selects a beneficiary, auto-enables AutoPay, or commits a payment without confirmation.</td></tr>
+  <tr><td>8. Reduce short-term memory load</td><td>Visible labels, a summary of the transfer, a step indicator, saved payees, and a persistent balance remove the need to remember previous screens.</td></tr>
+</table>
+
+<h4>4.4.3 HCI interaction models</h4>
+<table>
+  <tr><th style="width:20%">Model</th><th style="width:38%">Meaning in this application</th><th>Design evidence</th></tr>
+  <tr><td>Conceptual</td><td>The user understands the app as a set of accounts from which money can be sent, bills paid, and cards controlled.</td><td>Dashboard structure (accounts → actions → activity) and the transfer flow (recipient → amount → review → receipt).</td></tr>
+  <tr><td>Semantic</td><td>An action produces the result the user expects.</td><td>"Freeze card" immediately blocks transactions and shows a frozen status; "Pay bill" produces a receipt with a reference number.</td></tr>
+  <tr><td>Syntactic</td><td>The order of steps is logical and consistent.</td><td>Three-step transfer, review before confirmation, and OTP after review.</td></tr>
+  <tr><td>Lexical</td><td>The words and symbols are familiar and consistent.</td><td>"Send money", "Pay bill", "Freeze card", "Report lost", and formatted amounts and dates.</td></tr>
+</table>
+
+<h4>4.4.4 Information display and data entry</h4>
+<p>The interface applies the information-display guidelines of relevance, clarity, consistency, visual hierarchy, chunking, formatting, and accessibility. Only task-relevant information is shown, headings and amounts are emphasised by size and placement, long lists are grouped by date or category, and all dates and amounts use one format.</p>
+<p>Data entry follows the complementary guidelines: minimum input (saved beneficiaries, saved billers, biometric login), immediate validation, contextual help (where to find the consumer number), appropriate input methods (numeric keypad for amounts, date selection for scheduling), consistent field design, and constraints that prevent invalid characters or amounts above the available balance.</p>
+
+<h4>4.4.5 Distributed-interface and quality-of-service considerations</h4>
+<p>Banking is a distributed interaction: the phone, the bank server, the payment network, and the recipient's bank are separate systems. Live support chat is synchronous and shows presence, wait time, and a typing indicator. Transfers, bill payments, and history are asynchronous: they show a pending state, refresh when the connection returns, remain readable for the last 30 days offline, and use an idempotency reference so that a dropped connection cannot debit the customer twice.</p>
+<p>Quality of service is treated as part of the interface, not only as a backend concern. Login should respond within two seconds and a transfer confirmation within three, any operation longer than 300 ms should show a skeleton or progress indicator, and errors should be friendly and actionable ("We could not reach the bank. Your transfer was not sent. Try again.") rather than a blank screen or a technical code.</p>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 5 BAD DESIGN ============ -->
+<h2>5. Bad HCI Design</h2>
+<p>The bad design intentionally violates the principles used in Section 4. It is not a random collection of errors: each flaw was chosen to demonstrate a specific usability or accessibility failure, and each is analysed below. The same nine tasks are covered so that the two variants can be compared directly. The bad version represents a legacy banking portal that has grown by adding features without a design system, rather than a deliberately unusable parody.</p>
+<div class="note-box"><b>Important:</b> the purpose of this section is not merely to state that a screen is "bad". For every screen, the table identifies what is wrong, which HCI principle is violated, and how the problem affects the user's performance or satisfaction.</div>
+
+<h3>5.1 Bad Design Screens</h3>
+
+<h4>5.1.1 Bad Login Screen</h4>
+<figure><img src="screens/bad-b1.png" alt="Bad design: login screen"><figcaption>Figure 5.1 — Bad design: Login screen with tiny low-contrast text, competing buttons, a technical error, and a distracting advertisement.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The screen is crowded, the hierarchy is unclear, and several elements compete for attention. The user cannot tell which button is the real login action, and the error message does not explain how to recover.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>Inputs use placeholder text instead of persistent labels, so labels disappear as soon as the user types.</td><td>Recognition rather than recall; visibility</td><td>Users forget which value belongs to which field, especially after an error. They re-enter data and make more mistakes.</td></tr>
+  <tr><td>Most text is 6.5–9 px in light grey on a light background.</td><td>Readability; accessibility (WCAG contrast)</td><td>Older and low-vision users cannot read the labels, ad, or security note. The screen becomes unusable without zooming.</td></tr>
+  <tr><td>The error reads "ERROR 401: INVALID_CREDENTIALS" and appears at the top of the page with no link to the field.</td><td>Simple error handling; feedback</td><td>Non-technical users do not know whether the account number or the password is wrong, or what to do next. Repeated failures are likely.</td></tr>
+  <tr><td>Two competing primary buttons ("SUBMIT" in lime green and "Login" in orange) with different wording.</td><td>Visual hierarchy; consistency</td><td>Users hesitate and may choose the wrong action. The screen has no single obvious next step.</td></tr>
+  <tr><td>"Remember my password on this public computer" is pre-selected, and the page says the device may be shared.</td><td>User control; security and privacy</td><td>A user can unknowingly leave credentials saved on a public or shared device, creating a serious privacy risk.</td></tr>
+  <tr><td>A loan advertisement, six footer links, and long security text compete with the login form.</td><td>Simplicity; relevance</td><td>Cognitive load increases and the user's attention is pulled away from the only task that matters, increasing abandonment.</td></tr>
+</table>
+
+<h4>5.1.2 Bad Dashboard</h4>
+<figure><img src="screens/bad-b2.png" alt="Bad design: dashboard screen"><figcaption>Figure 5.2 — Bad design: Dashboard with sixteen equal tiles, three advertisements, reversed red/green amounts, and eight unlabeled controls.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> Everything is presented at once and nothing is prioritised. The balance — the main reason for opening the screen — is buried in small text near the bottom.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>Sixteen function tiles are identical in size, colour, and weight, including low-frequency items such as "Cheque book" and "Complaint form".</td><td>Visual hierarchy; simplicity; relevance</td><td>Users must read every tile to find "Transfer" or "Balance". The most common tasks take longer than in the good design.</td></tr>
+  <tr><td>The balance is shown in 7 px grey text as "PKR 245780.5", below the adverts and tiles, with a "Hide?" link.</td><td>Visual hierarchy; readability; formatting</td><td>The core question ("how much money do I have?") is answered poorly. Users may miss the amount or misread the missing thousands separators and decimals.</td></tr>
+  <tr><td>Credits are shown in red as "CR" and debits in green as "DR", the opposite of common financial and interface conventions, and abbreviations are unexplained.</td><td>Consistency; semantic model; colour meaning</td><td>Users misread whether money came in or went out, which can lead to incorrect budgeting decisions and mistrust.</td></tr>
+  <tr><td>Three banners plus a scrolling marquee and eight header links appear before any account information.</td><td>Cognitive load; focus; simplicity</td><td>Users are distracted by promotions and must scroll or scan past them before completing a banking task.</td></tr>
+  <tr><td>The bottom bar has eight unlabeled abbreviations ("TRF", "BILL", "SET", "OUT", "?"), and one item overflows the row.</td><td>Recognition; consistency; touch target size</td><td>Users must guess what each item does. The "?" control has no predictable meaning, and small targets cause mis-taps.</td></tr>
+  <tr><td>The page reports a last login from an "unknown device" but offers no way to review sessions or secure the account.</td><td>User control; visibility; trust</td><td>Customers cannot act on a possible security incident, which undermines confidence in the bank.</td></tr>
+</table>
+
+<h4>5.1.3 Bad Fund Transfer</h4>
+<figure><img src="screens/bad-b3.png" alt="Bad design: fund transfer screen"><figcaption>Figure 5.3 — Bad design: Fund transfer with contradictory labels, a preselected bank, and three competing submit buttons.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The form looks like a database table rather than a guided task. The sequence is unclear, the fee is hidden in a footnote, and there is no review step.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>The amount is requested first, before the source account or recipient, and the field order does not follow the mental model of a transfer.</td><td>Syntactic model; logical sequence</td><td>Users type an amount without knowing the available balance or the recipient, increasing the chance of an incorrect transfer.</td></tr>
+  <tr><td>Labels are tiny and some fields use placeholders only; the CNIC field is marked "optional but required"; the remarks limit says 20 characters without enforcement.</td><td>Clarity; consistency; error prevention</td><td>Users cannot tell which fields are mandatory. They submit incomplete forms and receive avoidable errors.</td></tr>
+  <tr><td>"XYZ Bank (Default)" is preselected as the destination bank.</td><td>Error prevention; user control</td><td>A user can send money to the wrong bank without ever making a deliberate choice. Recovery may be impossible.</td></tr>
+  <tr><td>Four different actions are offered: "Submit", "Proceed", "Continue", and "Clear Form", in four different colours.</td><td>Consistency; visual hierarchy</td><td>Users do not know which button advances the transfer. Choosing "Clear Form" after entering data is a common and frustrating mistake.</td></tr>
+  <tr><td>Fees, limits, and exchange-rate information are written in 6.5 px text at the bottom of the form.</td><td>Transparency; readability</td><td>Users discover charges only after the transaction, reducing trust and causing complaints.</td></tr>
+  <tr><td>There is no review screen, no confirmation, and no cancel action.</td><td>Error prevention; user control; closure</td><td>One tap commits an irreversible transfer. Mistakes cannot be caught before the money leaves the account.</td></tr>
+</table>
+
+<h4>5.1.4 Bad Confirmation</h4>
+<figure><img src="screens/bad-b4.png" alt="Bad design: confirmation dialog"><figcaption>Figure 5.4 — Bad design: Confirmation with no summary, an ambiguous "Yes / No / Maybe" dialog, and a warning that the transaction "may or may not" have completed.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The dialog asks for confirmation without showing what is being confirmed. The feedback afterwards is ambiguous, which is the worst possible outcome for a financial action.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>No recipient, account, amount, fee, or total is shown in the confirmation dialog.</td><td>Closure; visibility; recognition</td><td>Users cannot verify the transaction and must remember the previous screen. Errors are confirmed rather than caught.</td></tr>
+  <tr><td>The dialog offers "Yes", "No", and "Maybe" without explaining what each will do.</td><td>Clarity; simple error handling</td><td>"Maybe" has no defined behaviour. Users pick an option at random or close the dialog in confusion.</td></tr>
+  <tr><td>A yellow banner states that the transaction "may or may not have completed" and tells the user not to close the window.</td><td>Feedback; reliability; quality of service</td><td>The user cannot tell whether money was sent. This causes anxiety, duplicate payments, and support calls.</td></tr>
+  <tr><td>No OTP entry is shown; the footnote says an OTP was sent "maybe" to the registered number.</td><td>Security; error handling; trust</td><td>The authentication step is unverifiable, so the user cannot complete the task or confirm that the bank protected the transaction.</td></tr>
+  <tr><td>The only reference is "Ref: null", displayed in 6.5 px text.</td><td>Clarity; closure</td><td>The user has no reference number to quote to support, making recovery slow or impossible.</td></tr>
+  <tr><td>The dialog offers no edit, cancel, or timeout information.</td><td>User control</td><td>Users feel trapped and may abandon the app, then repeat the transfer through another channel.</td></tr>
+</table>
+
+<h4>5.1.5 Bad Transaction History</h4>
+<figure><img src="screens/bad-b5.png" alt="Bad design: transaction history"><figcaption>Figure 5.5 — Bad design: Transaction history as an ungrouped, tiny list with inconsistent dates and colour-only status markers.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The screen is a wall of text. There is no search, no grouping, and no reliable way to distinguish money in from money out.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>Twenty-two transactions are listed in one continuous block at 7.5 px, with no grouping by date or type.</td><td>Chunking; readability; cognitive load</td><td>Users cannot scan the list. Locating one payment requires reading every row and often results in failure.</td></tr>
+  <tr><td>Dates appear as "24/10/26", "Oct 24, 2026", "23-10-2026", "Yesterday", and "22 Oct" in the same list.</td><td>Consistency; formatting</td><td>Users must interpret each format separately and may misread day/month order, especially in an international context.</td></tr>
+  <tr><td>Status is conveyed only by a red or green dot, with no text label and no legend.</td><td>Accessibility; colour-only meaning</td><td>Colour-blind users cannot distinguish credits from debits. The list is also ambiguous when printed in grayscale.</td></tr>
+  <tr><td>There is no search, filter, or date-range control; only an account dropdown and a free-text period box.</td><td>Recognition; flexibility; efficiency</td><td>Users must remember when a transaction occurred and scroll manually. Business users cannot find a payment quickly.</td></tr>
+  <tr><td>A disabled "Loading..." button sits at the bottom and provides no feedback or pagination.</td><td>Feedback; visibility of system status</td><td>Users do not know whether more records exist or whether the list has finished loading, so they keep waiting or leave.</td></tr>
+  <tr><td>Amounts omit the currency, use inconsistent positive/negative signs, and descriptions are truncated.</td><td>Clarity; formatting</td><td>Users cannot tell the currency or the direction of a transaction with confidence, and cannot identify the merchant.</td></tr>
+</table>
+
+<h4>5.1.6 Bad Bill Payment</h4>
+<figure><img src="screens/bad-b6.png" alt="Bad design: bill payment"><figcaption>Figure 5.6 — Bad design: Bill payment with a long unsorted dropdown, an unlabeled consumer field, and an almost invisible Pay button.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The form is dominated by an open dropdown of dozens of companies, while the payment action is nearly invisible and the fee information is unreadable.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>The biller list contains about sixty entries with duplicates (three K-Electric entries) and no search or category grouping.</td><td>Cognitive load; recognition; efficiency</td><td>Users must scroll and read every option. Duplicate names make it easy to choose the wrong biller and pay the wrong account.</td></tr>
+  <tr><td>The consumer-number field has no label, no example, and no format guidance.</td><td>Clarity; error prevention; contextual help</td><td>Users do not know what to enter. Incorrect payments may be credited to another customer and are difficult to reverse.</td></tr>
+  <tr><td>The due date is shown as "27/10/26 (maybe)" in 6 px text.</td><td>Visual hierarchy; clarity; formatting</td><td>Users miss the deadline and incur late fees, which is the exact problem the screen is supposed to solve.</td></tr>
+  <tr><td>The service fee is in a 6 px footnote marked "subject to change", and AutoPay is enabled by default.</td><td>Transparency; user control</td><td>Users are charged unexpectedly and may be enrolled in automatic payments without realising it.</td></tr>
+  <tr><td>The "PAY" button is white text on a beige background, with no border or emphasis.</td><td>Affordance; visual hierarchy; contrast</td><td>Users cannot see the primary action. The task appears impossible to complete, so users abandon the screen.</td></tr>
+  <tr><td>No receipt is generated, and the screen says payments may take 3–5 days with no reference number.</td><td>Closure; feedback</td><td>Users cannot prove payment and must contact support when a biller claims non-payment.</td></tr>
+</table>
+
+<h4>5.1.7 Bad Card Management</h4>
+<figure><img src="screens/bad-b7.png" alt="Bad design: card management"><figcaption>Figure 5.7 — Bad design: Card management exposing the PIN, placing "Block card" next to "Show PIN", and using unlabeled toggles.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The screen combines a serious security exposure with dangerous action placement. A user trying to protect a lost card could instead permanently block it, or reveal the PIN to anyone nearby.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>The card's PIN is printed directly on the card graphic, and "SHOW PIN" requires no re-authentication.</td><td>Security; privacy; user control</td><td>Anyone looking over the user's shoulder can read the PIN. This is a direct financial risk and violates basic banking security expectations.</td></tr>
+  <tr><td>"BLOCK CARD" sits immediately next to "SHOW PIN" and has no confirmation step.</td><td>Error prevention; proximity of destructive actions</td><td>A mis-tap permanently blocks the card. The user must then request a replacement, causing days of disruption.</td></tr>
+  <tr><td>Three switches show "ON" in the same grey, with unlabeled purposes and indistinguishable positions.</td><td>Visibility; consistency; clarity</td><td>Users cannot tell which setting is enabled or what each switch controls. They may disable contactless payments or leave international payments on by mistake.</td></tr>
+  <tr><td>The same operation is called "Freeze", "Disable", "Lock", and "Block" in different places.</td><td>Consistency; semantic model</td><td>Users cannot tell whether these are reversible or permanent, so they avoid the feature or choose the wrong one.</td></tr>
+  <tr><td>There is no visible unfreeze or unblock path; the "UNBLOCK?" button is disabled and grey.</td><td>User control; error recovery</td><td>A user who freezes the card by mistake cannot restore it without visiting a branch, which undermines the purpose of the feature.</td></tr>
+  <tr><td>Security guidance and reporting instructions are in 6.5 px text with contradictory advice.</td><td>Readability; clarity; trust</td><td>Users cannot follow the instructions in an emergency and may distrust the bank's security messaging.</td></tr>
+</table>
+
+<h4>5.1.8 Bad Settings</h4>
+<figure><img src="screens/bad-b8.png" alt="Bad design: settings"><figcaption>Figure 5.8 — Bad design: Settings as a single 30-row list, with "Log out" beside "Delete account" and no feedback on save.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The page is an undifferentiated list. Important and dangerous options are adjacent, there is no grouping, and the save behaviour is unclear.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>About thirty unrelated options are presented in one flat, 8 px list with no headings.</td><td>Chunking; information organisation</td><td>Users must read the entire list to find text size or language, which is slow and tiring, particularly for the users who need accessibility settings most.</td></tr>
+  <tr><td>"Log Out" is placed immediately before "Delete Account", and both are plain links.</td><td>Error prevention; visual separation</td><td>A slip can permanently delete the account instead of logging out. The consequence is catastrophic and irreversible.</td></tr>
+  <tr><td>"SAVE" is at the top, the page says changes "may or may not be saved", and no confirmation appears after saving.</td><td>Visibility of system status; feedback</td><td>Users do not know whether their preferences were applied and may repeat the change or leave the app uncertain.</td></tr>
+  <tr><td>The text-size slider has no value and only affects some text; "High Contrast (coming soon)" is presented as a checkbox.</td><td>Affordance; feedback; accessibility</td><td>Users cannot predict the result of a change and may believe accessibility features are available when they are not.</td></tr>
+  <tr><td>Labels mix English and Urdu, and the same setting appears twice under different names.</td><td>Consistency; clarity</td><td>Users are unsure which option is authoritative and may change the wrong setting.</td></tr>
+  <tr><td>Delete account, reset settings, and clear cache have no confirmation or explanation of consequences.</td><td>User control; error handling</td><td>One accidental tap can erase data or the account. Users avoid the screen entirely, so genuine preferences are never set.</td></tr>
+</table>
+
+<h4>5.1.9 Bad Support</h4>
+<figure><img src="screens/bad-b9.png" alt="Bad design: support"><figcaption>Figure 5.9 — Bad design: Support with a disabled chat button, indistinguishable messages, an unexplained error, and an advertisement.</figcaption></figure>
+<div class="screen-meta">
+<p><b class="lbl">Overall impression:</b> The support screen provides no reliable channel. The chat is disabled without explanation, the conversation is ambiguous, and errors leave the user with no next step.</p>
+</div>
+<table>
+  <tr><th style="width:33%">What is wrong</th><th style="width:24%">Principle violated</th><th>Why users struggle / usability impact</th></tr>
+  <tr><td>The "Chat with us" button is disabled and greyed out, with no reason, wait time, or alternative channel.</td><td>Feedback; help and recovery</td><td>Users reach a dead end at the moment they most need help and have no way to escalate.</td></tr>
+  <tr><td>All messages — user, agent, and system — use the same grey bubble, with no sender name and no timestamps.</td><td>Visibility; consistency; distributed-interface feedback</td><td>Users cannot tell who said what or in which order, so they cannot trust or follow the conversation.</td></tr>
+  <tr><td>"Your message could not be sent. Retry?" is followed by a 504 code, with no retry button and no preserved text.</td><td>Error handling; user control; QoS</td><td>The user loses the message and must retype it, often more than once. The error code explains nothing.</td></tr>
+  <tr><td>The message input is partly hidden, and the page warns that refreshing will clear the chat and that the keyboard may cover the field.</td><td>Accessibility; user control</td><td>Users cannot see what they are typing and risk losing the entire conversation when they try to fix it.</td></tr>
+  <tr><td>No ticket number, transcript, email confirmation, or phone alternative is offered.</td><td>Closure; reliability</td><td>The issue remains unresolved with no record, forcing the customer to start over through another channel.</td></tr>
+  <tr><td>A promotional advertisement for home insurance occupies space inside the support screen.</td><td>Simplicity; relevance; trust</td><td>The user is trying to resolve a financial problem and is instead sold another product, which feels dismissive and erodes trust.</td></tr>
+</table>
+
+<!-- ============ 6 COMPARISON ============ -->
+<h2>6. Comparison: Good vs. Bad HCI Design</h2>
+<p>The table below compares the two variants across the aspects that matter most in a banking interface. Each row is based on specific evidence in Figures 4.1–4.9 and 5.1–5.9.</p>
+<table>
+  <tr><th style="width:18%">HCI aspect</th><th style="width:41%">Good design</th><th>Bad design</th></tr>
+  <tr><td>Navigation</td><td>Five labelled bottom tabs; each task is at most three steps; back preserves data.</td><td>Eight unlabeled header links and eight abbreviated bottom items; no clear hierarchy or path.</td></tr>
+  <tr><td>Visual hierarchy</td><td>Balance is the largest element; one primary action per screen; secondary information is quieter.</td><td>Sixteen equal tiles, three advertisements, and a 7 px balance; nothing stands out.</td></tr>
+  <tr><td>Layout and grouping</td><td>White cards on a light background, 8-point spacing, clear sections, and generous whitespace.</td><td>Cramped tables, inconsistent margins, unrelated items adjacent, and content that overflows.</td></tr>
+  <tr><td>Typography and readability</td><td>Lato, 16 px body text, 1.5 line height, strong contrast, and consistent styles.</td><td>6.5–9 px text, mixed serif and sans-serif fonts, and long unstructured paragraphs.</td></tr>
+  <tr><td>Colour and contrast</td><td>Navy, teal, green, amber, and red used semantically; 11.5:1 on primary buttons; colour is never the only signal.</td><td>Low-contrast grey text, red for credits and green for debits, and colour-only status dots.</td></tr>
+  <tr><td>Consistency</td><td>One design system, one set of terms, and the same button hierarchy throughout.</td><td>"Submit / Proceed / Continue", "Freeze / Lock / Block", and five date formats in one product.</td></tr>
+  <tr><td>Feedback</td><td>Inline validation, loading states, OTP timer, typing indicator, success receipt, and status labels.</td><td>Technical error codes, "may or may not have completed", a disabled loading button, and no receipt.</td></tr>
+  <tr><td>Error prevention</td><td>Review screen, OTP, saved beneficiaries, limits, constraints, and confirmations for destructive actions.</td><td>Preselected bank, no review, "Yes / No / Maybe", no confirmation, and destructive actions next to safe ones.</td></tr>
+  <tr><td>Accessibility</td><td>48 px targets, WCAG AA contrast, text scaling, high contrast, reduced motion, screen-reader labels, and no colour-only meaning.</td><td>Tiny targets, 6.5 px text, colour-only status, unlabeled switches, and no accessible alternative.</td></tr>
+  <tr><td>User control and trust</td><td>Cancel, edit, unfreeze, hide balance, warned session timeout, re-authentication for the PIN, and masked account numbers.</td><td>No cancel or unfreeze, pre-checked "remember password", PIN visible on the card, and hidden fees.</td></tr>
+</table>
+<p>The comparison shows that the difference between the two variants is not primarily aesthetic. The bad design fails at the level of task completion: users cannot reliably find the balance, confirm a transfer, pay a bill, protect a card, or obtain help. The good design treats each of those tasks as a short, visible, reversible-where-possible sequence with clear feedback at every step.</p>
+
+<div class="pagebreak"></div>
+
+<!-- ============ 7 TOOLS ============ -->
+<h2>7. Design Tools</h2>
+<p><b>Figma</b> was used as the primary design and prototyping tool because it supports reusable components, variants, auto layout, and clickable prototypes — everything needed to keep nine screens consistent and to demonstrate the navigation between them. Screens were rendered at a 390 × 844 px mobile viewport using the same layout specifications, colours, and type scale as the Figma file.</p>
+<ul>
+  <li><b>Figma</b> — editable high-fidelity screens, components, variants, auto layout, and clickable prototypes for both variants.</li>
+  <li><b>Stark plugin</b> — contrast checking against WCAG AA before export.</li>
+  <li><b>Lato typeface</b> — readable humanist sans-serif across both variants (the bad variant deliberately mixes fonts).</li>
+  <li><b>Material-style outline icons</b> — a consistent 24 px set, never the only label for a critical action.</li>
+  <li><b>390 × 844 px viewport</b> — the standard phone frame for all eighteen screens.</li>
+  <li><b>Google Forms or Maze (optional)</b> — short usability feedback such as time-on-task and preference ratings.</li>
+</ul>
+<p>The Figma file has four pages — <b>01 Good Design</b>, <b>02 Bad Design</b>, <b>03 Components and Styles</b>, and <b>04 Flows and Prototype</b> — with components shared across screens so that the comparison between variants stays fair.</p>
+
+<!-- ============ 8 CONCLUSION ============ -->
+<h2>8. Conclusion</h2>
+<p>This project designed the same online banking application twice: once with good HCI practice and once with deliberately poor practice. The good design shows that banking usability comes from a few disciplined decisions — one primary action per screen, visible labels, a consistent visual system, a review step before irreversible actions, plain-language feedback, and accessibility built in rather than added later. The bad design shows that the opposite choices do not merely look unattractive: they stop customers completing essential tasks and can create financial and privacy risks. Many of the most serious failures are not visual at all — a preselected destination bank, a "Yes / No / Maybe" confirmation, a missing receipt, or a PIN shown without re-authentication — which confirms that error prevention, closure, user control, and visibility of system status are practical banking requirements rather than abstract theory. Future work would test both variants with five to eight representative users through a think-aloud walkthrough of the transfer and bill-payment flows, measure task completion time and error rate, and compare System Usability Scale scores.</p>
+
+<!-- ============ 9 REFERENCES ============ -->
+<h2>9. References</h2>
+<div class="refs">
+<p>Dix, A., Finlay, J., Abowd, G., &amp; Beale, R. (2004). <i>Human-Computer Interaction</i> (3rd ed.). Pearson Education.</p>
+<p>Shneiderman, B., Plaisant, C., Cohen, M., Jacobs, S., Elmqvist, N., &amp; Diakopoulos, N. (2016). <i>Designing the User Interface: Strategies for Effective Human-Computer Interaction</i> (6th ed.). Pearson.</p>
+<p>Stone, D., Jarrett, C., Woodroffe, M., &amp; Minocha, S. (2005). <i>User Interface Design and Evaluation</i>. Morgan Kaufmann.</p>
+<p>Tidwell, J. (2010). <i>Designing Interfaces: Patterns for Effective Interaction Design</i> (2nd ed.). O'Reilly Media.</p>
+<p>Nielsen, J. (1994). <i>Usability Engineering</i>. Morgan Kaufmann. (See also Nielsen's ten usability heuristics.)</p>
+<p>W3C. (2018). <i>Web Content Accessibility Guidelines (WCAG) 2.1</i>. World Wide Web Consortium. https://www.w3.org/TR/WCAG21/</p>
+<p>Google. (2024). <i>Material Design 3</i>. https://m3.material.io/</p>
+<p>Apple. (2024). <i>Human Interface Guidelines</i>. https://developer.apple.com/design/human-interface-guidelines/</p>
+<p>International Organization for Standardization. (2018). <i>ISO 9241-11:2018 — Ergonomics of human-system interaction — Part 11: Usability: Definitions and concepts</i>.</p>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecureBank · HCI prototype builds</title>
+<style>
+  :root {
+    --navy: #0B3C5D;
+    --teal: #0E7C7B;
+    --red: #B3261E;
+    --ink: #16242E;
+    --muted: #5F7180;
+    --line: #D5DFE6;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 48px 24px 64px;
+    background: radial-gradient(1100px 460px at 50% -12%, #F4F8FA 0%, #E4EBF0 55%, #D9E2E8 100%);
+    font-family: Lato, "Noto Sans", system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 880px; margin: 0 auto; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11.5px; font-weight: 800; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--teal);
+  }
+  .eyebrow i { width: 7px; height: 7px; border-radius: 50%; background: var(--teal); }
+  h1 {
+    margin: 12px 0 8px;
+    font-size: 40px; line-height: 1.08; letter-spacing: -.8px; color: var(--navy);
+  }
+  .lede { margin: 0 0 8px; font-size: 16px; line-height: 1.55; color: #435662; max-width: 640px; }
+  .meta { font-size: 12.5px; color: var(--muted); font-weight: 600; }
+
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 30px 0 10px; }
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    background: #fff; border: 1px solid var(--line); border-radius: 16px;
+    padding: 20px; box-shadow: 0 10px 26px rgba(11, 60, 93, .08);
+    transition: transform .15s ease, box-shadow .15s ease, border-color .15s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 16px 34px rgba(11,60,93,.14); border-color: #B7CBD6; }
+  .card:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+  .tag {
+    display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .07em;
+    text-transform: uppercase; padding: 4px 8px; border-radius: 999px; margin-bottom: 12px;
+  }
+  .tag.good { background: #E8F3F3; color: #0A6564; }
+  .tag.bad { background: #FDF0EE; color: var(--red); }
+  .card h2 { margin: 0 0 6px; font-size: 20px; letter-spacing: -.3px; color: var(--navy); }
+  .card p { margin: 0 0 14px; font-size: 13.5px; line-height: 1.5; color: #4A5D69; }
+  .card ul { margin: 0; padding-left: 17px; font-size: 12.5px; line-height: 1.7; color: #52646F; }
+  .go { margin-top: 14px; font-size: 12.5px; font-weight: 800; color: var(--teal); }
+  .card.bad .go { color: var(--red); }
+
+  section { margin-top: 34px; }
+  h3 { margin: 0 0 10px; font-size: 15px; color: var(--navy); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  ol, ul.plain { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.65; color: #4A5D69; }
+  kbd {
+    font: 700 10.5px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: #fff; border: 1px solid #C9D5DD; border-bottom-width: 2px;
+    border-radius: 4px; padding: 2px 5px; color: #33454F;
+  }
+  .note {
+    margin-top: 30px; padding: 14px 16px;
+    background: #FFFDF6; border: 1px solid #EBDDB8; border-radius: 12px;
+    font-size: 12.5px; line-height: 1.6; color: #5C4A1B;
+  }
+  footer { margin-top: 36px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+  footer a { color: var(--navy); font-weight: 700; }
+  @media (max-width: 720px) {
+    body { padding: 28px 16px 48px; }
+    h1 { font-size: 30px; }
+    .cards, .cols { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <span class="eyebrow"><i></i>HCI project · interactive prototype</span>
+  <h1>SecureBank: two builds, five tasks, one score.</h1>
+  <p class="lede">The same nine-screen banking app exists twice. One applies the design principles from the report; the other breaks them on purpose. Each build is standalone, includes a presenter console, annotations, a task sheet, a SUS questionnaire, instrumentation, and exportable data.</p>
+  <p class="meta">Department of Software Engineering · Mehran University of Engineering and Technology, Jamshoro</p>
+
+  <div class="cards">
+    <a class="card good" href="good/index.html">
+      <span class="tag good">Good design</span>
+      <h2>Open the good build</h2>
+      <p>Clear hierarchy, visible feedback, error prevention, and accessible controls.</p>
+      <ul>
+        <li>Login, transfer, bills, cards, history, support</li>
+        <li>Inline validation and confirmation before committing</li>
+        <li>Offline, timeout, skeleton, and long-name states</li>
+      </ul>
+      <div class="go">good/index.html →</div>
+    </a>
+
+    <a class="card bad" href="bad/index.html">
+      <span class="tag bad">Bad design</span>
+      <h2>Open the bad build</h2>
+      <p>Deliberate violations kept for comparison, not a pattern to copy.</p>
+      <ul>
+        <li>Tiny low-contrast text and mixed date formats</li>
+        <li>No validation, uncertain outcomes, exposed PIN</li>
+        <li>Advertising, error codes, and dead-end support</li>
+      </ul>
+      <div class="go">bad/index.html →</div>
+    </a>
+  </div>
+
+  <section class="cols">
+    <div>
+      <h3>Run a session</h3>
+      <ol>
+        <li>Open one build and enter the participant code in the console.</li>
+        <li>Start task T1–T5 in the task sheet, reading each task aloud.</li>
+        <li>Let the participant think aloud; do not point at the screen.</li>
+        <li>Score the SUS, then download JSON and CSV.</li>
+        <li>Clear the log before the next participant.</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Presenter keys</h3>
+      <ul class="plain">
+        <li><kbd>1</kbd>–<kbd>9</kbd> jump to a screen, <kbd>←</kbd> <kbd>→</kbd> step</li>
+        <li><kbd>A</kbd> annotations, <kbd>C</kbd> clean phone</li>
+        <li><kbd>T</kbd> tasks, <kbd>S</kbd> SUS, <kbd>D</kbd> data, <kbd>E</kbd> edge states</li>
+        <li><kbd>R</kbd> restart, <kbd>?</kbd> help, <kbd>Esc</kbd> close</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="note">
+    <b>No build step, no server required.</b> Each folder is self-contained: open <code>good/index.html</code> or <code>bad/index.html</code> directly, or serve the folder over HTTP. Data is stored in this browser only; download it before clearing browser storage.
+  </div>
+
+  <footer>
+    Report source: <a href="report/HCI_Project_Report.html">HCI_Project_Report.html</a> ·
+    Report PDF: <a href="report/HCI_Project_Report.pdf">HCI_Project_Report.pdf</a><br>
+  </footer>
+</main>
+</body>
+</html>
