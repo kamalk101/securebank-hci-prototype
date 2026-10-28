@@ -35,12 +35,12 @@
   var CALLOUTS = {
     good: {
       1: [
-        { t: 'Inline, specific error message', d: '"Incorrect password. 2 attempts left." says what failed, how many attempts remain, and what to do next. It sits on the field, not in a banner at the top of the screen.', sel: '.err' },
+        { t: 'Inline, specific error message', d: '"Incorrect password. 2 attempts remaining." says what failed and how many tries are left, on the field itself. After three failures sign-in locks for 30 seconds, states why, and the fingerprint shortcut still works.', sel: '.err', x: .5, y: .48 },
         { t: 'A second way to sign in', d: 'Fingerprint removes the memory burden of a long password and provides a fallback that still feels secure.', sel: '.btn.ghost' },
         { t: 'Security expectation set early', d: 'The notice states that the bank never asks for a PIN, password, or OTP by call, SMS, or email — reducing the chance a customer falls for a scam.', sel: '.secure' }
       ],
       2: [
-        { t: 'Balance is scannable and can be hidden', d: 'The amount is the largest element on the screen. The eye control hides it for use in public without leaving the screen.', sel: '.balance' },
+        { t: 'Balance starts masked for privacy', d: 'The amount is the largest element on the screen, but it reads "PKR ••••••" until the customer taps the eye — unreadable to anyone standing behind them, and the same control hides it again.', sel: '.balance' },
         { t: 'Four frequent tasks, one tap away', d: 'Transfer, pay bill, scan QR, and top-up cover routine banking, so users do not hunt through menus.', sel: '.qa' },
         { t: 'Status is visible per transaction', d: '"Completed" and "Processing" answer the question "did my money move?" without opening a detail screen.', sel: '.tx' }
       ],
@@ -82,7 +82,7 @@
     },
     bad: {
       1: [
-        { t: 'Error exposed as a system code', d: '"ERROR 401: INVALID_CREDENTIALS" names the internal fault, not the user\'s problem. It does not say which field is wrong or what to do.', x: .5, y: .3 },
+        { t: 'Error exposed as a system code', d: '"ERROR 401: INVALID_CREDENTIALS" names the internal fault, not the user\'s problem. It never says which field is wrong, shows no attempt count, and after three failures the account locks with no recovery except reloading the page.', x: .5, y: .3 },
         { t: 'A deceptive security option', d: '"Remember my password on this public computer" invites a security mistake and is presented as a normal checkbox.', x: .5, y: .62 },
         { t: 'Competing calls to action and an advert', d: 'SUBMIT, Login, and Reset are different words for overlapping actions, and an advertisement sits above the form.', x: .5, y: .82 }
       ],
@@ -905,6 +905,14 @@
       return;
     }
 
+    if (name === 'wrongpass') {
+      go(1);
+      setTimeout(function () {
+        if (app() && app().loginFail) app().loginFail();
+      }, 240);
+      return;
+    }
+
     if (name === 'amount') {
       go(3);
       setTimeout(function () {
@@ -996,6 +1004,7 @@
       ['offline', 'Network loss + retry', 'Banner with retry; history stays readable'],
       ['timeout', '30-second session timeout', 'Explained sign-out, draft preserved'],
       ['biometric', 'Biometric rejected', 'Retry or fall back to password'],
+      ['wrongpass', 'Incorrect password', MODE === 'good' ? 'Inline error with attempts remaining' : 'Jargon modal, no attempt count'],
       ['amount', 'Amount above balance', 'Inline error with the real available balance'],
       ['longname', 'Very long beneficiary names', 'Rows wrap without pushing amounts off-screen'],
       ['skeleton', 'Slow balance refresh', 'Skeleton state, then a fresh value'],

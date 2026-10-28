@@ -115,6 +115,8 @@
 
   var SINGLE = window.SINGLE_VARIANT || null;
 
+  var demoLogin = {};
+
   var state = {
     mode: 'good',
     step: 1,
@@ -579,9 +581,53 @@
 
     var login = $$('.btn', g1)[0];
     var bio = $$('.btn', g1)[1];
+    var attempts = 0;
+    var MAX_ATTEMPTS = 3;
+    var LOCK_SECONDS = 30;
+    var lockTick = null;
+    var lockLeft = 0;
+    var loginLabel = login.textContent;
+
+    function endLock() {
+      if (lockTick) { clearInterval(lockTick); lockTick = null; }
+      lockLeft = 0;
+      login.disabled = false;
+      login.removeAttribute('aria-disabled');
+      login.textContent = loginLabel;
+    }
+
+    function lockOut() {
+      endLock();
+      lockLeft = LOCK_SECONDS;
+      login.disabled = true;
+      login.setAttribute('aria-disabled', 'true');
+      login.textContent = 'Try again in ' + lockLeft + 's';
+      lockTick = setInterval(function () {
+        lockLeft -= 1;
+        if (lockLeft > 0) { login.textContent = 'Try again in ' + lockLeft + 's'; return; }
+        endLock();
+        attempts = 0;
+        clearErr();
+      }, 1000);
+    }
+
+    function wrongAttempt() {
+      attempts += 1;
+      if (attempts >= MAX_ATTEMPTS) {
+        fail('Too many incorrect attempts. Sign-in is locked for ' + LOCK_SECONDS + ' seconds. Use your fingerprint, or wait for the timer.');
+        lockOut();
+        return;
+      }
+      var left = MAX_ATTEMPTS - attempts;
+      fail('Incorrect password. ' + left + ' attempt' + (left === 1 ? '' : 's') + ' remaining.');
+    }
+
     act(login, function () {
+      if (lockTick) return;
       if (!pwd.value) { fail('Enter your password to continue.'); return; }
       if (pwd.value.length < 6) { fail('Password must be at least 6 characters.'); return; }
+      if (pwd.value !== 'secure123') { wrongAttempt(); return; }
+      attempts = 0;
       clearErr();
       loading(login, 'Signing in\u2026', 650, function () {
         go(2);
@@ -594,11 +640,22 @@
     act(bio, function () {
       loading(bio, 'Checking\u2026', 650, function () {
         pwd.value = 'secure123';
+        attempts = 0;
+        endLock();
         clearErr();
         go(2);
         toast('Signed in with fingerprint.');
       });
     });
+
+    demoLogin.good = function () {
+      endLock();
+      attempts = 0;
+      pwd.value = 'wrong123';
+      pwd.dispatchEvent(new Event('input', { bubbles: true }));
+      go(1);
+      wrongAttempt();
+    };
 
     act($('.register a', g1), function () {
       dialog({
@@ -613,17 +670,30 @@
     var g2 = $('#g2');
     var balance = $('.balnum', g2);
     var eye = $('.balhead .eye', g2);
-    var hidden = false;
+    var MASK = 'PKR \u2022\u2022\u2022\u2022\u2022\u2022';
+    var hidden = true;
+
     eye.setAttribute('role', 'button');
     eye.tabIndex = 0;
-    eye.setAttribute('aria-label', 'Hide balance');
-    eye.setAttribute('aria-pressed', 'false');
-    act(eye, function () {
-      hidden = !hidden;
-      balance.textContent = hidden ? 'PKR \u2022\u2022\u2022\u2022\u2022\u2022' : money(state.balance);
+
+    function renderBalance() {
+      balance.textContent = hidden ? MASK : money(state.balance);
       eye.setAttribute('aria-pressed', String(hidden));
       eye.setAttribute('aria-label', hidden ? 'Show balance' : 'Hide balance');
+    }
+    renderBalance();
+
+    act(eye, function () {
+      hidden = !hidden;
+      renderBalance();
     });
+
+    API.g2 = {
+      enter: function () {
+        hidden = true;
+        renderBalance();
+      }
+    };
 
     act($('.bellwrap .iconbtn', g2), function () { toast('No new notifications.'); }, 'Notifications');
     act($('.avatar', g2), function () { go(8); }, 'Open profile');
@@ -1531,19 +1601,59 @@
     var fields = $$('.badfield', b1);
     var user = fields[0];
     var pass = fields[1];
+    var attempts = 0;
+    var locked = false;
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      });
+    }
+
+    function badAlert(text, clearFields) {
+      dialog({
+        tone: 'bad',
+        title: 'Message',
+        body: text,
+        actions: [{
+          label: 'OK', kind: 'primary', onClick: function () {
+            if (clearFields) { user.value = ''; pass.value = ''; }
+          }
+        }]
+      });
+    }
 
     function submit() {
+      if (locked) { badAlert('Account locked. Contact your branch.', false); return; }
       if (!user.value || !pass.value) {
-        dialog({
-          tone: 'bad',
-          title: 'Message',
-          body: 'ERROR 401: INVALID_CREDENTIALS \u2014 authentication failure has occurred due to invalid credentials.',
-          actions: [{ label: 'OK', kind: 'primary', onClick: function () { go(2); } }]
-        });
-      } else {
-        go(2);
+        badAlert('ERROR 401: INVALID_CREDENTIALS \u2014 authentication failure has occurred due to invalid credentials.', true);
+        return;
       }
+      if (user.value.replace(/\s+/g, '') !== '024578910023') {
+        badAlert('No account found for ' + esc(user.value.trim()) + '. Check the number or visit a branch.', false);
+        return;
+      }
+      if (pass.value !== 'secure123') {
+        attempts += 1;
+        if (attempts >= 3) {
+          locked = true;
+          badAlert('Account locked. Contact your branch.', true);
+        } else {
+          badAlert('ERROR 401: INVALID_CREDENTIALS \u2014 authentication failure has occurred due to invalid credentials.', true);
+        }
+        return;
+      }
+      go(2);
     }
+
+    demoLogin.bad = function () {
+      locked = false;
+      attempts = 0;
+      go(1);
+      user.value = '0245 7891 0023';
+      pass.value = 'wrong123';
+      submit();
+    };
 
     var buttons = $$('.badbtn', b1);
     act(buttons[0], submit);
@@ -1869,7 +1979,11 @@
       dialog: dialog,
       toast: toast,
       recordTx: recordTx,
-      newRef: newRef
+      newRef: newRef,
+      loginFail: function () {
+        var run = demoLogin[state.mode];
+        if (run) run();
+      }
     };
     document.dispatchEvent(new CustomEvent('sb:ready', { detail: { mode: state.mode, single: SINGLE } }));
   }
