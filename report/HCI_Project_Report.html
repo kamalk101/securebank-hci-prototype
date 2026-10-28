@@ -86,7 +86,8 @@ figcaption{font-size:8.5pt;color:#4B5A66;font-style:italic;margin-top:3pt}
   <div><b>5.</b> Bad HCI Design</div>
   <div class="l2">5.1 Bad Design Screens (Screens 1–9)</div>
   <div><b>6.</b> Comparison: Good vs. Bad HCI Design</div>
-  <div><b>7.</b> Design Tools</div>
+  <div><b>7.</b> Design Tools and Implementation</div>
+  <div class="l2">7.1 Design Tools · 7.2 Implementation · 7.3 Hosting and Access</div>
   <div><b>8.</b> Conclusion</div>
   <div><b>9.</b> References</div>
 </div>
@@ -117,6 +118,7 @@ figcaption{font-size:8.5pt;color:#4B5A66;font-style:italic;margin-top:3pt}
 
 <h3>2.4 Scope and Approach</h3>
 <p>The project contains two complete variants of the same nine-screen flow: a <b>Good HCI Design</b> that applies usability and accessibility principles, and a <b>Bad HCI Design</b> that intentionally violates them so the resulting problems can be analysed. Both cover identical tasks, so the comparison in Section 6 is like-for-like. Design work followed four stages — identifying users and context, defining functional and non-functional requirements, building a consistent visual system and layouts, then reviewing both variants against Shneiderman's eight golden rules, HCI interaction models, information-display and data-entry guidelines, distributed-interface considerations, and quality-of-service requirements.</p>
+<p>A working, interactive implementation of both variants accompanies this report. It runs in any modern browser at <b>https://securebank-prototype-replitzip--kamal1122pk.replit.app/</b>, where either build can be walked through screen by screen and the same tasks can be attempted on both designs.</p>
 
 <div class="pagebreak"></div>
 
@@ -521,17 +523,38 @@ figcaption{font-size:8.5pt;color:#4B5A66;font-style:italic;margin-top:3pt}
 <div class="pagebreak"></div>
 
 <!-- ============ 7 TOOLS ============ -->
-<h2>7. Design Tools</h2>
-<p><b>Figma</b> was used as the primary design and prototyping tool because it supports reusable components, variants, auto layout, and clickable prototypes — everything needed to keep nine screens consistent and to demonstrate the navigation between them. Screens were rendered at a 390 × 844 px mobile viewport using the same layout specifications, colours, and type scale as the Figma file.</p>
+<h2>7. Design Tools and Implementation</h2>
+<p>The project used two toolchains: a design toolchain that settled the layouts, colour system, and type scale, and a hand-written web implementation that made both variants interactive. The live prototype opens the implementation; the design files remain the reference for the specifications in Section 4.</p>
+
+<h3>7.1 Design Tools</h3>
 <ul>
-  <li><b>Figma</b> — editable high-fidelity screens, components, variants, auto layout, and clickable prototypes for both variants.</li>
+  <li><b>Figma</b> — editable high-fidelity screens, components, variants, auto layout, and clickable flows for both variants.</li>
   <li><b>Stark plugin</b> — contrast checking against WCAG AA before export.</li>
   <li><b>Lato typeface</b> — readable humanist sans-serif across both variants (the bad variant deliberately mixes fonts).</li>
   <li><b>Material-style outline icons</b> — a consistent 24 px set, never the only label for a critical action.</li>
   <li><b>390 × 844 px viewport</b> — the standard phone frame for all eighteen screens.</li>
-  <li><b>Google Forms or Maze (optional)</b> — short usability feedback such as time-on-task and preference ratings.</li>
 </ul>
 <p>The Figma file has four pages — <b>01 Good Design</b>, <b>02 Bad Design</b>, <b>03 Components and Styles</b>, and <b>04 Flows and Prototype</b> — with components shared across screens so that the comparison between variants stays fair.</p>
+
+<h3>7.2 Implementation</h3>
+<p>Both variants were built as a single-page web application in plain HTML, CSS, and JavaScript. There is no framework, no package manager, no build step, and no external dependency: each build is a folder of static files that runs from any disk, USB stick, or static host, which keeps the prototype reproducible and protects the interface from tool version changes.</p>
+<ul>
+  <li><b>HTML5</b> — one page per build with all nine screens present as labelled sections, only the active one shown, so navigation, back behaviour, and browser history can be exercised realistically.</li>
+  <li><b>CSS</b> — custom properties for design tokens (colour, spacing, radius, type scale) with no preprocessor. The bad variant reuses the same stylesheet but deliberately breaks the token scale, so its inconsistency comes from chosen values rather than a separate codebase.</li>
+  <li><b>Vanilla JavaScript</b> — the interaction layer: screen routing, form validation, transfers, bill payment, card controls, history filtering, and dialogs. Amount formatting and validation pass through one shared money helper, so no screen can disagree with another about the balance.</li>
+  <li><b>Shared dataset</b> — both variants start from the same customer (Ayesha Khan, current account •• 0023) and the same opening balance, so a task performed in one variant is directly comparable with the same task in the other.</li>
+  <li><b>Study layer</b> — a separate script adds numbered annotations, a task sheet with timings, a System Usability Scale form, an event log, and JSON/CSV export. It attaches to either build without altering the interface under evaluation.</li>
+</ul>
+
+<h3>7.3 Hosting and Access</h3>
+<p>The prototype is deployed as a static site, so no server, database, or account is needed to view it. Study data stays in the participant's own browser and is exported by the researcher, which keeps personal data off the host.</p>
+<ul>
+  <li><b>Live prototype:</b> https://securebank-prototype-replitzip--kamal1122pk.replit.app/</li>
+  <li><b>Good HCI build:</b> https://securebank-prototype-replitzip--kamal1122pk.replit.app/good/</li>
+  <li><b>Bad HCI build:</b> https://securebank-prototype-replitzip--kamal1122pk.replit.app/bad/</li>
+  <li><b>Source and report copy:</b> https://github.com/kamalk101/securebank-hci-prototype</li>
+</ul>
+
 
 <!-- ============ 8 CONCLUSION ============ -->
 <h2>8. Conclusion</h2>

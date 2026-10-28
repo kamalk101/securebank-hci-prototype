@@ -1,9 +1,10 @@
 # SecureBank prototype — study builds
 
-Live: <https://kamalk101.github.io/securebank-hci-prototype/>
+Live: <https://securebank-prototype-replitzip--kamal1122pk.replit.app/> · mirror:
+<https://kamalk101.github.io/securebank-hci-prototype/>
 
 Two standalone builds of the nine-screen banking prototype described in
-`report/HCI_Project_Report.html`: a **good** design that applies the principles and a
+`HCI_Project_Report.html`: a **good** design that applies the principles and a
 **bad** design that deliberately violates them. Both share one dataset and one
 study console, so the same tasks can be run on each and compared.
 
@@ -16,6 +17,7 @@ prototype/
 ├── build_prototype.py      regenerates good/ and bad/ from ../index.html
 ├── package_replit.py       builds dist/securebank-prototype-replit.zip
 ├── dist/                   generated upload archive (not committed normally)
+├── site/                   git working copy of the deployed site (GitHub)
 ├── assets/
 │   ├── study.js            presenter console, annotations, tasks, SUS, logging
 │   └── study.css           console, pins, drawer, print styles
@@ -78,6 +80,22 @@ On replit.com: **Create Repl → HTML, CSS, JS**, then drag *the contents* of th
 unzipped folder into the Files pane so `index.html` sits at the root, and press
 **Run**. Use **Deploy → Static** for a link that does not sleep. If you keep the
 project in git, **Import from GitHub** is the cleaner route.
+
+## GitHub Pages
+
+Live at <https://kamalk101.github.io/securebank-hci-prototype/> (repo:
+`kamalk101/securebank-hci-prototype`). `site/` is the working copy: it holds the
+same files as the zip and is its own git repository, so a rebuild means
+
+```bash
+.venv/bin/python prototype/build_prototype.py
+.venv/bin/python prototype/package_replit.py
+rm -rf prototype/site/{good,bad,report,docs} prototype/site/*.html prototype/site/*.md
+unzip -q -o prototype/dist/securebank-prototype-replit.zip -d prototype/site
+cd prototype/site && git add -A && git commit -m "Rebuild" && git push
+```
+
+Pages rebuilds on push to `main` in about a minute.
 
 ## Study console
 
